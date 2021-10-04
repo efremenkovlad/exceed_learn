@@ -4,6 +4,8 @@
 
 <body>
 
+<link href="/home/user/work/JS ToDo/style.css" rel="stylesheet" type="text/css">
+
 <div>
 
     <input type="text" id = "text">
@@ -12,17 +14,17 @@
 </div>
 
 
-<div id="AllTasks">
-</div> 
+<div class= "tasks" id="AllTasks"></div> 
+
+
+<div class="sumTasks" id="sumTasks"></div>
 
 
 <div>
-
-    <button class="allButton" id="allButton">All</button>
-    <button class="activedButton" id="activedButton">Actived</button>
-    <button class="completedButton" id="completedButton">Completed</button>
+    <button onclick="showTaskOnList('All')">All</button>
+    <button onclick="showTaskOnList('Actived')">Actived</button>
+    <button onclick="showTaskOnList('Completed')">Completed</button>
     <button class="clearCompletedButton" id="clearCompletedButton">Clear completed</button>
-
 </div>
 
 <script src="/home/user/work/JS ToDo/task2.js"></script>

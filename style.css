@@ -1,0 +1,20 @@
+
+div, input {
+
+    font-size: x-large;
+}
+
+button {
+
+    font-size: large;
+}
+
+.Actived {
+    color: green;
+
+}
+
+.Completed {
+    color: red;
+    text-decoration: line-through
+}
