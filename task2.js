@@ -14,7 +14,7 @@ const divClassText = document.getElementById("text")
 /** Handler for button  @param {Enter} */
 divClassText.addEventListener("keyup", function (event) {
     event.preventDefault();
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && event.target.value.trim()) {
         addTask();
         appendElementToFront();
         document.getElementById('text').value = ''; 
@@ -61,8 +61,11 @@ function showTaskOnList(paramChange) {
             arrayTasks.forEach(el =>  addTaskToList(el));
             break;
         case CLASS_NAME_CLEAR:
-            arrayTasks = arrayTasks.filter((el) => el.isCompleted == false);
-            arrayTasks.forEach(el =>  addTaskToList(el));
+            arrayTasks = arrayTasks.filter((el) => {
+                if (!el.isCompleted) {
+                    addTaskToList(el);
+                    return true;
+                }});
             break;
     };
 
@@ -70,12 +73,14 @@ function showTaskOnList(paramChange) {
 
 /* Change status task*/
 function changeStatus(evt) {
-    const id = evt.currentTarget.myParam;
+    const id = parseInt(evt.currentTarget.myParam, 10);
 
-    arrayTasks.forEach((elem) => {if (elem.id == id) {
-        if (elem.isCompleted == true) {elem.isCompleted = false; 
+    arrayTasks.forEach((elem) => {if (elem.id === id) {
+        if (elem.isCompleted) {
+            elem.isCompleted = false; 
             evt.currentTarget.className = CLASS_NAME_ACTIVED;
-        } else {elem.isCompleted = true; 
+        } else {
+            elem.isCompleted = true; 
             evt.currentTarget.className = CLASS_NAME_COMPLETED;
         };
     };
@@ -97,7 +102,7 @@ function addTaskToList(elem) {
 /*Function for show element on page*/ 
 function showElement() {
     const sumTask = document.getElementById('sumTasks');
-    const activedTask = arrayTasks.filter((el) => el.isCompleted == false);
+    const activedTask = arrayTasks.filter((el) => el.isCompleted === false);
 
     sumTask.innerHTML = `${activedTask.length} items left`;
 };
