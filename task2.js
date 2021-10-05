@@ -9,10 +9,7 @@ const CLASS_NAME_CLEAR = "Clear"
 const divClassAllTasks = document.getElementById("AllTasks")
 const divClassText = document.getElementById("text")
 
-//document.body.onload = showElement;
-
-
-
+    
 
 /** Handler for button  @param {Enter} */
 divClassText.addEventListener("keyup", function (event) {
@@ -25,8 +22,7 @@ divClassText.addEventListener("keyup", function (event) {
     };
 });
 
-/**  Функция, которая отображает элементы массива
- * @param {arrayTasks} на странице */
+/**  Function for append element in @param {arrayTasks}  */
 function appendElementToFront() {
 
     const elem = arrayTasks[arrayTasks.length - 1];
@@ -47,40 +43,32 @@ function addTask() {
     const id = !arrayTasks.length ? 0 : arrayTasks[arrayTasks.length - 1].id + 1;
     const data = { id, task: value, isCompleted: false}
     arrayTasks = [...arrayTasks, data];
-    console.log(arrayTasks)
-    
 };
 
 /* Function case for all buttons. Show various variants*/
 function showTaskOnList(paramChange) {
     [...divClassAllTasks.children].forEach(el => divClassAllTasks.removeChild(el));
-    console.log(paramChange);
+
     switch (paramChange) {
         case CLASS_NAME_COMPLETED:
-            console.log('========com');
+
             arrayTasks.forEach(el => { if (el.isCompleted === true) addTaskToList(el)});
             break;
         case CLASS_NAME_ACTIVED:
-            console.log('======act');
             arrayTasks.forEach(el => { if (el.isCompleted === false) addTaskToList(el)});
             break;
         case CLASS_NAME_ALL: 
-        console.log('======all');
             arrayTasks.forEach(el =>  addTaskToList(el));
             break;
-        case "clear":
-            console.log('=======cl');
-            arrayTasks = arrayTasks.filter((el) => el.status == CLASS_NAME_ACTIVED);
+        case CLASS_NAME_CLEAR:
+            arrayTasks = arrayTasks.filter((el) => el.isCompleted == false);
             arrayTasks.forEach(el =>  addTaskToList(el));
             break;
     };
-    // lo
 
-    // showElement();
 };
 
 /* Change status task*/
-
 function changeStatus(evt) {
     const id = evt.currentTarget.myParam;
 
@@ -97,7 +85,6 @@ function changeStatus(evt) {
 
 /* Add task to front*/
 function addTaskToList(elem) {
-    console.log(elem);
     const newDiv = document.createElement("div");
     newDiv.innerHTML = `${elem.task}`;
     newDiv.addEventListener('click', changeStatus);
@@ -107,58 +94,11 @@ function addTaskToList(elem) {
     divClassAllTasks.appendChild(newDiv);
 };
 
-/* Handler for button "Actived" */
-// activedButton.onclick = function () {
-//     showTaskOnList(CLASS_NAME_ACTIVED);
-// };
-
-function test (e) {
-    console.log(e);
-    showTaskOnList(CLASS_NAME_ACTIVED);
-}
-
-// /* Handler for button "Completed" */
-// completedButton.onclick = function () {
-//     showTaskOnList(CLASS_NAME_COMPLETED);
-// };
-
-/* Handler for button "All" */
-// allButton.onclick = function () {
-//     showTaskOnList(CLASS_NAME_ALL);
-// };
-
-/* Handler for button "ClearCompleted" */
-clearCompletedButton.onclick = function () {
-    showTaskOnList(CLASS_NAME_CLEAR);
-};
-
+/*Function for show element on page*/ 
 function showElement() {
     const sumTask = document.getElementById('sumTasks');
-    const activedTask = arrayTasks.filter((el) => el.status == CLASS_NAME_ACTIVED);
+    const activedTask = arrayTasks.filter((el) => el.isCompleted == false);
 
     sumTask.innerHTML = `${activedTask.length} items left`;
 };
 
-
-
-
-
-// function changeStatus(evt) {
-//     console.log(arrayTasks);
-//     const id = evt.currentTarget.myParam;
-//     arrayTasks.forEach((elem) => { 
-//         if (elem.id == id) {
-//             if (elem.isCompleted == true) {
-//                 elem.isCompleted = false;
-//                 console.log(arrayTasks);
-//                 evt.currentTarget.className = CLASS_NAME_COMPLETED;
-
-//             } else {
-//                 elem.isCompleted = true;
-//                 console.log(arrayTasks);
-//                 evt.currentTarget.className = CLASS_NAME_ACTIVED;
-//             };
-//         };
-//     })
-//     showElement();
-// };

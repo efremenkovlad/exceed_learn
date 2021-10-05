@@ -9,6 +9,15 @@ button {
     font-size: large;
 }
 
+.buttonChangeState:hover {
+    background:rgb(212, 241, 212);
+    }
+    
+.buttonChangeState:focus {
+    background:rgb(180, 228, 236);
+    }
+
+
 .Actived {
     color: green;
 
@@ -18,3 +27,5 @@ button {
     color: red;
     text-decoration: line-through
 }
+
+
